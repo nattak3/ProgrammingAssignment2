@@ -1,0 +1,52 @@
+
+R version 3.3.3 (2017-03-06) -- "Another Canoe"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+[R.app GUI 1.69 (7328) x86_64-apple-darwin13.4.0]
+
+[History restored from /Users/lilac-home/.Rapp.history]
+
+> getwd()
+[1] "/Users/lilac-home/Desktop/r programming directory/ProgrammingAssignment2-master"
+> makeCacheMatrix <- function(x = matrix()) {
++         inv <- NULL
++         set <- function(y) {
++                 x <<- y
++                 inv <<- NULL
++         }
++         get <- function() x
++         setInverse <- function(inverse) inv <<- inverse
++         getInverse <- function() inv
++         list(set = set,
++              get = get,
++              setInverse = setInverse,
++              getInverse = getInverse)
++ }
+> 
+> cacheSolve <- function(x, ...) {
+        ## Return a matrix that is the inverse of 'x'
+        inv <- x$getInverse()
+        if (!is.null(inv)) {
+                message("getting cached data")
+                return(inv)
+        }
+        mat <- x$get()
+        inv <- solve(mat, ...)
+        x$setInverse(inv)
+        inv
+}
